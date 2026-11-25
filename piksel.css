@@ -104,6 +104,17 @@
 .pk-rozet--camgobegi { --renk: #0e9fb0; }
 .pk-rozet--pembe { --renk: #c04fc8; }
 
+/* Piksel ilerleme çubuğu: --deger 0 ile 100 arasında */
+.pk-ilerleme {
+  --deger: 50;
+  --k: var(--pk-piksel);
+  height: calc(var(--k) * 4);
+  background:
+    linear-gradient(90deg, var(--pk-mor) calc(var(--deger) * 1%), transparent 0),
+    repeating-linear-gradient(90deg, var(--pk-cizgi) 0 var(--k), transparent var(--k) calc(var(--k) * 2));
+  box-shadow: 0 0 0 var(--k) var(--pk-cizgi);
+}
+
 /* Yanıp sönen imleç ve hafif yıldız titremesi */
 .pk-imlec::after {
   content: "_";
