@@ -1,0 +1,122 @@
+/* Deokwave piksel teması: GitHub sayfalarımızdaki gece mavisi piksel arayüzün CSS hali. */
+
+:root {
+  --pk-gece: #070b22;
+  --pk-kart: #0b1236;
+  --pk-cizgi: #22357f;
+  --pk-parlak: #2f47a8;
+  --pk-yazi: #e6edff;
+  --pk-soluk: #8fa3dc;
+  --pk-mor: #8b5cf6;
+  --pk-mor-acik: #b9a6ff;
+  --pk-camgobegi: #5fd4ff;
+  --pk-piksel: 3px;
+  --pk-yazi-tipi: "Cascadia Mono", "Consolas", ui-monospace, monospace;
+}
+
+.pk-sayfa {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, .015) 0 1px, transparent 1px 4px),
+    linear-gradient(180deg, #04061a 0%, #0a1033 55%, #131d52 100%);
+  color: var(--pk-yazi);
+  font-family: var(--pk-yazi-tipi);
+  image-rendering: pixelated;
+}
+
+/* Köşeleri piksel piksel kesilmiş kutu */
+.pk-kutu {
+  --k: var(--pk-piksel);
+  position: relative;
+  padding: calc(var(--k) * 4) calc(var(--k) * 5);
+  background: var(--pk-kart);
+  clip-path: polygon(
+    0 var(--k), var(--k) var(--k), var(--k) 0,
+    calc(100% - var(--k)) 0, calc(100% - var(--k)) var(--k), 100% var(--k),
+    100% calc(100% - var(--k)), calc(100% - var(--k)) calc(100% - var(--k)), calc(100% - var(--k)) 100%,
+    var(--k) 100%, var(--k) calc(100% - var(--k)), 0 calc(100% - var(--k))
+  );
+  box-shadow: inset 0 0 0 var(--k) var(--pk-cizgi), inset 0 calc(var(--k) * 2) 0 0 var(--pk-parlak);
+}
+
+.pk-baslik {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--pk-piksel) * 3);
+  margin: 0 0 calc(var(--pk-piksel) * 4);
+  font-size: 18px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.pk-baslik::after {
+  content: "";
+  flex: 1;
+  height: var(--pk-piksel);
+  background: repeating-linear-gradient(90deg, var(--pk-cizgi) 0 var(--pk-piksel), transparent var(--pk-piksel) calc(var(--pk-piksel) * 2));
+}
+
+.pk-buton {
+  --k: var(--pk-piksel);
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--k) * 2);
+  padding: calc(var(--k) * 2) calc(var(--k) * 4);
+  border: 0;
+  background: var(--pk-kart);
+  color: var(--pk-yazi);
+  font: inherit;
+  letter-spacing: .08em;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow:
+    inset var(--k) var(--k) 0 0 var(--pk-parlak),
+    inset calc(var(--k) * -1) calc(var(--k) * -1) 0 0 var(--pk-gece),
+    0 0 0 var(--k) var(--pk-cizgi);
+}
+
+.pk-buton:hover { color: #fff; background: var(--pk-parlak); }
+.pk-buton:active { transform: translateY(var(--k)); box-shadow: inset 0 0 0 var(--k) var(--pk-cizgi); }
+.pk-buton:focus-visible { outline: var(--k) solid var(--pk-mor-acik); outline-offset: var(--k); }
+
+.pk-rozet {
+  --renk: var(--pk-mor);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  background: #140b36;
+  box-shadow: 0 0 0 var(--pk-piksel) var(--renk);
+  font-size: 13px;
+  letter-spacing: .06em;
+}
+
+.pk-rozet::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: var(--renk);
+}
+
+.pk-rozet--mavi { --renk: #3b6be0; }
+.pk-rozet--turuncu { --renk: #d9653b; }
+.pk-rozet--camgobegi { --renk: #0e9fb0; }
+.pk-rozet--pembe { --renk: #c04fc8; }
+
+/* Yanıp sönen imleç ve hafif yıldız titremesi */
+.pk-imlec::after {
+  content: "_";
+  margin-left: 2px;
+  color: var(--pk-camgobegi);
+  animation: pk-yanip 1s steps(1) infinite;
+}
+
+.pk-yildiz { animation: pk-titre 3s steps(1) infinite; }
+
+@keyframes pk-yanip { 50% { opacity: 0; } }
+@keyframes pk-titre { 50% { opacity: .3; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .pk-imlec::after, .pk-yildiz { animation: none; }
+}
