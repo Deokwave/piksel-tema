@@ -115,6 +115,19 @@
   box-shadow: 0 0 0 var(--k) var(--pk-cizgi);
 }
 
+/* Uyarı ve bilgi kutusu: solda piksel şerit */
+.pk-not {
+  --renk: var(--pk-camgobegi);
+  margin: calc(var(--pk-piksel) * 4) 0;
+  padding: calc(var(--pk-piksel) * 3) calc(var(--pk-piksel) * 4);
+  background: rgba(255, 255, 255, .03);
+  box-shadow: inset calc(var(--pk-piksel) * 2) 0 0 var(--renk);
+  color: var(--pk-yazi);
+}
+
+.pk-not--uyari { --renk: #f0b429; }
+.pk-not--hata { --renk: #e8455f; }
+
 /* Yanıp sönen imleç ve hafif yıldız titremesi */
 .pk-imlec::after {
   content: "_";
